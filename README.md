@@ -18,8 +18,8 @@ As a team you will create a interactive map of a theme park. The park will inclu
 
 ## Technology Requirements
 * SASS
-* JQuery 
-* Grunt (with JSHINT) 
+* JQuery
+* Grunt (with JSHINT)
 * Promises
 * Browserify
 * Handlebars
