@@ -15,7 +15,7 @@ let ThemePark= {
 ThemePark.parkInfo.getParkInfo()
 .then (function (data) {
 	let ParkInfoData = data;
-	console.log("ParkInfoData", ParkInfoData);
+	// console.log("ParkInfoData", ParkInfoData);
 	let parkInfoCard = ThemePark.dataProcessor.parkInfoOnLoad(ParkInfoData[0]);
 	ThemePark.DOMmanager.writeToInfoBox(parkInfoCard);
 });
@@ -24,10 +24,8 @@ ThemePark.parkInfo.getParkInfo()
 ThemePark.areas.getAreas()
 .then (function(data) {
 	let areasData = data;
-	// console.log("areasData", areasData);
-	for (let item in areasData) {
-		// console.log(areasData[item].colorTheme);
-	}
+	console.log("areasData", areasData);
+ ThemePark.dataProcessor.attachColorToMapSquares(areasData);
 });
 	//THEN go through it to find colors
 //then print that to the DOM - use js
