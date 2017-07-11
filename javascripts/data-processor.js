@@ -13,8 +13,8 @@ dataProcessor.parkInfoOnLoad = function (ParkInfoData) {
 return parkInfoCard;
 };
 dataProcessor.attachColorToMapSquares =function(areasData){
-	let $divArray= $('section.map').find('.mapSq');//stores all the divs with mapSq class
-	 console.log ("divArray", $divArray);
+	// let $divArray= $('section.map').find('.mapSq');//stores all the divs with mapSq class
+	 // console.log ("divArray", $divArray);
 	 let counter= 1;
 	for (let item in areasData) {
 		console.log ("gridcounter", $(`#grid${counter}`));
