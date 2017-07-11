@@ -32,3 +32,16 @@ ThemePark.areas.getAreas()
 	//THEN go through it to find colors
 //then print that to the DOM - use js
 //
+
+
+// push to data processor to package for dom using templates,
+// display filtered attractions in DOM
+
+// on click, add class .highlight that adds a border
+
+
+// on area click get id of div element
+$(".area-box").on("click", function() {
+	let idNumber = $(this).attr("id").match(/\d+/)[0];
+	ThemePark.attractions.getAttractions(idNumber);
+});
