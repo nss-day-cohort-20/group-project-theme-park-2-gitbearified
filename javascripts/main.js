@@ -23,9 +23,8 @@ ThemePark.parkInfo.getParkInfo()
 ThemePark.areas.getAreas()
 .then (function(data) {
 	let areasData = data;
-	console.log("areasData", areasData);
- ThemePark.dataProcessor.attachColorToMapSquares(areasData);
- ThemePark.dataProcessor.attachNameToMapSquares(areasData);
+	 ThemePark.dataProcessor.attachColorToMapSquares(areasData);
+	 ThemePark.dataProcessor.attachNameToMapSquares(areasData);
 
 });
 
@@ -42,3 +41,13 @@ $(".area-box").on("click", function() {
 	ThemePark.attractions.getAttractions(idNumber);
 	ThemePark.dataProcessor.giveAttractionsTypeName(ThemePark.attractions.getAttractions(idNumber));
 });
+=======
+	// console.log("areasData", areasData);
+	for (let item in areasData) {
+		// console.log(areasData[item].colorTheme);
+	}
+});
+	//THEN go through it to find colors
+//then print that to the DOM - use js
+//
+>>>>>>> Stashed changes
