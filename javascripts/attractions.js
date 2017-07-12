@@ -1,34 +1,21 @@
-'use strict';
+"use strict";
 
 let $ = require('jquery');
 
 let attractions = {};
-let selectedAttractions = [];
 
-attractions.getAttractions = function(id) {
+attractions.getAttractions = function() {
 	return new Promise(function(resolve, reject) {
 		$.ajax({
-			url: "https://gitbearified.firebaseio.com/attractions.json"
+			url: 'https://gitbearified.firebaseio.com/attractions.json'
 		})
 		.done(function(data) {
-			resolve(getSelected(data, id));
+			resolve(data);
 		})
 		.fail(function(error) {
 			console.log(error.statusText);
 		});
 	});
 };
-
-// match the id to area id,
-// compare to area_id in attractions,
-function getSelected(data, id) {
-	selectedAttractions = [];
-	$.each(data, function(key, val) {
-		if (val.area_id == id) {
-			selectedAttractions.push(val);
-		}
-	});
-	return selectedAttractions;
-}
 
 module.exports = attractions;

@@ -7,10 +7,10 @@ let parkInfo = {};
 parkInfo.getParkInfo = function() {
 	return new Promise ( function(resolve, reject) {
 		$.ajax({
-  	url: "https://gitbearified.firebaseio.com/park-info.json"
+  			url: 'https://gitbearified.firebaseio.com/park-info.json'
 		})
-		.done( function(parkInfoData) {
-		  resolve(parkInfoData);
+		.done( function(data) {
+		  resolve(data);
 		})
 		.fail(reject);
 	});

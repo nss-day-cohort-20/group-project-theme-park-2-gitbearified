@@ -39,18 +39,24 @@ ThemePark.areas.getAreas()
 // on area click get id of div element
 $(".area-box").on("click", function() {
 	let idNumber = $(this).attr("id").match(/\d+/)[0];
-	return ThemePark.attractions.getAttractions(idNumber)
-	.then (function(arrayOfSelectedAttracts) {
-		if(Object.keys(ThemePark.types.getAttrTypesObj()).length === 0) {
-			ThemePark.types.getTypes();
-		}
-		return ThemePark.types.giveAttractsTheirTypeName(arrayOfSelectedAttracts);
-	})
-	.then (function(data) {
-		console.log(data);
-		// templates?
-	});
+	var selectedAttractions;
+	return ThemePark.attractions.getAttractions()
+		.then (function(arrayOfAllAttractionObjs) {
+			return ThemePark.dataProcessor.getSelected(arrayOfAllAttractionObjs, idNumber);
+		})
+		.then (function(arrayOfSelectedAttractions) {
+			selectedAttractions = arrayOfSelectedAttractions;
+			return ThemePark.types.getTypes();
+		})
+		.then (function(typesData) {
+			let newTypesObj = ThemePark.dataProcessor.reformatTypeData(typesData);
+			selectedAttractions = ThemePark.dataProcessor.giveAttractsTheirTypeName(newTypesObj, selectedAttractions);
+			console.log(selectedAttractions);
+		});
 });
+		// if(Object.keys(ThemePark.types.getAttrTypesObj()).length === 0) {
+			// ThemePark.types.getTypes();
+
 
 
 
