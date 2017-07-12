@@ -15,7 +15,6 @@ let ThemePark= {
 ThemePark.parkInfo.getParkInfo()
 .then (function (data) {
 	let ParkInfoData = data;
-	// console.log("ParkInfoData", ParkInfoData);
 	let parkInfoCard = ThemePark.dataProcessor.parkInfoOnLoad(ParkInfoData[0]);
 	ThemePark.DOMmanager.writeToInfoBox(parkInfoCard);
 });
@@ -24,12 +23,10 @@ ThemePark.parkInfo.getParkInfo()
 ThemePark.areas.getAreas()
 .then (function(data) {
 	let areasData = data;
-	console.log("areasData", areasData);
- ThemePark.dataProcessor.attachColorToMapSquares(areasData);
+	 ThemePark.dataProcessor.attachColorToMapSquares(areasData);
+	 ThemePark.dataProcessor.attachNameToMapSquares(areasData);
+
 });
-	//THEN go through it to find colors
-//then print that to the DOM - use js
-//
 
 
 // push to data processor to package for dom using templates,
@@ -44,3 +41,13 @@ $(".area-box").on("click", function() {
 	ThemePark.attractions.getAttractions(idNumber);
 	ThemePark.dataProcessor.giveAttractionsTypeName(ThemePark.attractions.getAttractions(idNumber));
 });
+=======
+	// console.log("areasData", areasData);
+	for (let item in areasData) {
+		// console.log(areasData[item].colorTheme);
+	}
+});
+	//THEN go through it to find colors
+//then print that to the DOM - use js
+//
+>>>>>>> Stashed changes
