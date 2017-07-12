@@ -6,23 +6,29 @@ let dataProcessor = Object.create(null);
 
 dataProcessor.parkInfoOnLoad = function (ParkInfoData) {
 	let parkInfoCard = `<h2>${ParkInfoData.name}</h2>
-	<h3>${ParkInfoData.location}</h3>
-	<p>${ParkInfoData.description}</p>
-	<p>Hours: ${ParkInfoData.operating_hours[0].opening} am to ${ParkInfoData.operating_hours[0].closing} pm</p>`;
-	// console.log("park info card", parkInfoCard);
-return parkInfoCard;
+		<h3>${ParkInfoData.location}</h3>
+		<p>${ParkInfoData.description}</p>
+		<p>Hours: ${ParkInfoData.operating_hours[0].opening} am to ${ParkInfoData.operating_hours[0].closing} pm</p>`;
+	return parkInfoCard;
 };
-dataProcessor.attachColorToMapSquares =function(areasData){
+
+dataProcessor.attachColorToMapSquares = function(areasData){
 	// let $divArray= $('section.map').find('.mapSq');//stores all the divs with mapSq class
-	 // console.log ("divArray", $divArray);
 	 let counter= 1;
 	for (let item in areasData) {
 		console.log ("gridcounter", $(`#grid${counter}`));
 		$(`#grid${counter}`).css('background-color', `${areasData[item].colorTheme}`);
 		counter++;
 	}
-// $('#grid1').css('background-color', '#bada55');
+};
 
+dataProcessor.attachNameToMapSquares = function(areasData) {
+	let counter = 1;
+	for (let item in areasData) {
+		$(`#grid${counter}`).attr("title", `${areasData[item].name}`);
+		$(`#grid${counter}`).html(`<h2>${areasData[item].name}</h2>`);
+		counter ++;
+	}
 };
 
 // match the id to area id,
