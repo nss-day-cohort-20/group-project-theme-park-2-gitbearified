@@ -25,13 +25,4 @@ dataProcessor.attachColorToMapSquares =function(areasData){
 
 };
 
-
-
-dataProcessor.giveAttractionsTypeName = function(arrAttObjs, types){
-	for (var i = 0; i < arrAttObjs.length; i++) {
-		arrAttObjs[i].type_id = types;
-	}
-
-};
-
 module.exports = dataProcessor;

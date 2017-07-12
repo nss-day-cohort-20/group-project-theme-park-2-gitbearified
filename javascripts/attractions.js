@@ -28,7 +28,6 @@ function getSelected(data, id) {
 			selectedAttractions.push(val);
 		}
 	});
-	console.log(selectedAttractions);
 	return selectedAttractions;
 }
 

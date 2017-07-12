@@ -41,6 +41,13 @@ ThemePark.areas.getAreas()
 // on area click get id of div element
 $(".area-box").on("click", function() {
 	let idNumber = $(this).attr("id").match(/\d+/)[0];
-	ThemePark.attractions.getAttractions(idNumber);
-	ThemePark.dataProcessor.giveAttractionsTypeName(ThemePark.attractions.getAttractions(idNumber));
+	return ThemePark.attractions.getAttractions(idNumber)
+	.then (function(arrayOfSelectedAttracts) {
+		ThemePark.types.getTypes(arrayOfSelectedAttracts);
+		console.log(arrayOfSelectedAttracts);
+	});
 });
+
+
+
+
