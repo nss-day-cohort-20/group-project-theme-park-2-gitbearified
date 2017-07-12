@@ -1,6 +1,8 @@
 'use strict';
 
 let $ = require('jquery');
+let Handlebars = require('hbsfy/runtime');
+let attractionTemplate = require('../templates/attractions.hbs');
 
 let dataProcessor = Object.create(null);
 

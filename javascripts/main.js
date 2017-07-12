@@ -1,6 +1,8 @@
 'use strict';
 
 let $ = require('jquery');
+let Handlebars = require('hbsfy/runtime');
+let attractionTemplate = require('../templates/attractions.hbs');
 
 let ThemePark= {
 	areas: require ('./areas.js'),
@@ -48,7 +50,10 @@ $(".area-box").on("click", function() {
 		.then (function(typesData) {
 			let newTypesObj = ThemePark.dataProcessor.reformatTypeData(typesData);
 			selectedAttractions = ThemePark.dataProcessor.giveAttractsTheirTypeName(newTypesObj, selectedAttractions);
-			console.log(selectedAttractions);
+			let attractions={selectedAttractions};
+			console.log ("attractions", attractions);
+			ThemePark.DOMmanager.writeToInfoBox(attractionTemplate(selectedAttractions));
+
 		});
 });
 
