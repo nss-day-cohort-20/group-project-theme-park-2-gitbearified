@@ -18,7 +18,7 @@ dataProcessor.attachColorToMapSquares = function(areasData){
 	// let $divArray= $('section.map').find('.mapSq');//stores all the divs with mapSq class
 	 let counter= 1;
 	for (let item in areasData) {
-		console.log ("gridcounter", $(`#grid${counter}`));
+
 		$(`#grid${counter}`).css('background-color', `${areasData[item].colorTheme}`);
 		counter++;
 	}
@@ -63,6 +63,18 @@ dataProcessor.giveAttractsTheirTypeName = function(newTypesObj, arrayOfAttractio
 		attractionsArray[i].type = newTypesObj[attractionsArray[i].type_id];
 	}
 	return attractionsArray;
+};
+
+//function to modify selected attractions to add key of hours to that object
+
+dataProcessor.giveAttractsParkHours = function(ParkInfoData, selectedAttractions){
+	console.log ("ParkInfoData", ParkInfoData[0].operating_hours);
+	console.log ("selectedAttractions",selectedAttractions);
+	selectedAttractions.forEach(function(attraction){
+		attraction.hours= [`Opens:${ParkInfoData[0].operating_hours[0].opening}:00 AM`, `Closes:${ParkInfoData[0].operating_hours[0].closing}:00 PM`];//string for each ?
+	});
+
+
 };
 
 
