@@ -11,7 +11,6 @@ let ThemePark= {
 	DOMmanager: require ('./DOM-manager.js')
 };
 
-
 ThemePark.parkInfo.getParkInfo()
 .then (function (data) {
 	let ParkInfoData = data;
@@ -19,7 +18,6 @@ ThemePark.parkInfo.getParkInfo()
 	let parkInfoCard = ThemePark.dataProcessor.parkInfoOnLoad(ParkInfoData[0]);
 	ThemePark.DOMmanager.writeToInfoBox(parkInfoCard);
 });
-
 
 ThemePark.areas.getAreas()
 .then (function(data) {
@@ -43,8 +41,14 @@ $(".area-box").on("click", function() {
 	let idNumber = $(this).attr("id").match(/\d+/)[0];
 	return ThemePark.attractions.getAttractions(idNumber)
 	.then (function(arrayOfSelectedAttracts) {
-		ThemePark.types.getTypes(arrayOfSelectedAttracts);
-		console.log(arrayOfSelectedAttracts);
+		if(Object.keys(ThemePark.types.getAttrTypesObj()).length === 0) {
+			ThemePark.types.getTypes();
+		}
+		return ThemePark.types.giveAttractsTheirTypeName(arrayOfSelectedAttracts);
+	})
+	.then (function(data) {
+		console.log(data);
+		// templates?
 	});
 });
 
