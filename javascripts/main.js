@@ -11,14 +11,12 @@ let ThemePark= {
 	DOMmanager: require ('./DOM-manager.js')
 };
 
-
 ThemePark.parkInfo.getParkInfo()
 .then (function (data) {
 	let ParkInfoData = data;
 	let parkInfoCard = ThemePark.dataProcessor.parkInfoOnLoad(ParkInfoData[0]);
 	ThemePark.DOMmanager.writeToInfoBox(parkInfoCard);
 });
-
 
 ThemePark.areas.getAreas()
 .then (function(data) {
@@ -38,16 +36,22 @@ ThemePark.areas.getAreas()
 // on area click get id of div element
 $(".area-box").on("click", function() {
 	let idNumber = $(this).attr("id").match(/\d+/)[0];
-	ThemePark.attractions.getAttractions(idNumber);
-	ThemePark.dataProcessor.giveAttractionsTypeName(ThemePark.attractions.getAttractions(idNumber));
+	var selectedAttractions;
+	return ThemePark.attractions.getAttractions()
+		.then (function(arrayOfAllAttractionObjs) {
+			return ThemePark.dataProcessor.getSelected(arrayOfAllAttractionObjs, idNumber);
+		})
+		.then (function(arrayOfSelectedAttractions) {
+			selectedAttractions = arrayOfSelectedAttractions;
+			return ThemePark.types.getTypes();
+		})
+		.then (function(typesData) {
+			let newTypesObj = ThemePark.dataProcessor.reformatTypeData(typesData);
+			selectedAttractions = ThemePark.dataProcessor.giveAttractsTheirTypeName(newTypesObj, selectedAttractions);
+			console.log(selectedAttractions);
+		});
 });
-=======
-	// console.log("areasData", areasData);
-	for (let item in areasData) {
-		// console.log(areasData[item].colorTheme);
-	}
-});
-	//THEN go through it to find colors
-//then print that to the DOM - use js
-//
->>>>>>> Stashed changes
+
+		// if(Object.keys(ThemePark.types.getAttrTypesObj()).length === 0) {
+			// ThemePark.types.getTypes();
+

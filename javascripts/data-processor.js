@@ -31,13 +31,36 @@ dataProcessor.attachNameToMapSquares = function(areasData) {
 	}
 };
 
+// match the id to area id,
+// compare to area_id in attractions,
+dataProcessor.getSelected = function(data, id) {
+	return new Promise (function(resolve, reject) {
+	let selectedAttractions = [];
+		$.each(data, function(key, val) {
+			if (val.area_id == id) {
+				selectedAttractions.push(val);
+			}
+		});
+	resolve(selectedAttractions);
+	// fail? reject?
+	});
+};
 
+dataProcessor.reformatTypeData = function(data) {
+	let dataValues = Object.values(data);
+	let newObj = dataValues.reduce(function(acc, cur) {
+		acc[cur.id] = cur.name;
+		return acc;
+	},{});
+	return newObj;
+};
 
-dataProcessor.giveAttractionsTypeName = function(arrAttObjs, types){
-	for (var i = 0; i < arrAttObjs.length; i++) {
-		arrAttObjs[i].type_id = types;
+dataProcessor.giveAttractsTheirTypeName = function(newTypesObj, arrayOfAttractionObjects) {
+	let attractionsArray = arrayOfAttractionObjects;
+	for (var i = 0; i < attractionsArray.length; i++) {
+		attractionsArray[i].type = newTypesObj[attractionsArray[i].type_id];
 	}
-	return parkInfoCard;
+	return attractionsArray;
 };
 
 module.exports = dataProcessor;
