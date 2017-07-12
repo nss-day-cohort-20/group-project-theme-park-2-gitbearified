@@ -13,6 +13,9 @@ let ThemePark= {
 	DOMmanager: require ('./DOM-manager.js')
 };
 
+
+
+
 ThemePark.parkInfo.getParkInfo()
 .then (function (data) {
 	let ParkInfoData = data;
@@ -27,6 +30,7 @@ ThemePark.areas.getAreas()
 	 ThemePark.dataProcessor.attachNameToMapSquares(areasData);
 
 });
+
 
 
 // push to data processor to package for dom using templates,

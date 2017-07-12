@@ -65,4 +65,5 @@ dataProcessor.giveAttractsTheirTypeName = function(newTypesObj, arrayOfAttractio
 	return attractionsArray;
 };
 
+
 module.exports = dataProcessor;
