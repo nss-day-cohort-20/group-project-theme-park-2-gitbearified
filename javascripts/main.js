@@ -3,7 +3,9 @@
 let $ = require('jquery');
 let Handlebars = require('hbsfy/runtime');
 let attractionTemplate = require('../templates/attractions.hbs');
+let $parkInfoDiv = $('.parkInfo');
 let search = require('./search.js');
+
 
 let ThemePark= {
 	areas: require ('./areas.js'),
@@ -14,14 +16,11 @@ let ThemePark= {
 	DOMmanager: require ('./DOM-manager.js')
 };
 
-
-
-
 ThemePark.parkInfo.getParkInfo()
 .then (function (data) {
 	let ParkInfoData = data;
 	let parkInfoCard = ThemePark.dataProcessor.parkInfoOnLoad(ParkInfoData[0]);
-	ThemePark.DOMmanager.writeToInfoBox(parkInfoCard);
+	ThemePark.DOMmanager.writeToDOM(parkInfoCard, $parkInfoDiv);
 	return ParkInfoData;
 });
 
@@ -30,16 +29,7 @@ ThemePark.areas.getAreas()
 	let areasData = data;
 	 ThemePark.dataProcessor.attachColorToMapSquares(areasData);
 	 ThemePark.dataProcessor.attachNameToMapSquares(areasData);
-
 });
-
-
-
-// push to data processor to package for dom using templates,
-// display filtered attractions in DOM
-
-// on click, add class .highlight that adds a border
-
 
 // on area click get id of div element
 $(".area-box").on("click", function() {
@@ -60,14 +50,18 @@ $(".area-box").on("click", function() {
 
 		})
 		.then(function(ParkInfoData){
-
-			//need parkInfo called here
 			ThemePark.dataProcessor.giveAttractsParkHours(ParkInfoData, selectedAttractions);
-			//need to modify selectedAttractions to have key value pair parkHours opening to closing
 			let attractions={selectedAttractions};//for handlebars
 			console.log ("attractions", attractions);
-			ThemePark.DOMmanager.writeToInfoBox(attractionTemplate(selectedAttractions));
+			ThemePark.DOMmanager.writeToDOM(attractionTemplate(selectedAttractions), $parkInfoDiv);
 		});
+});
+
+
+$(".parkInfo").on("click", function(event) {
+	let selected = $(event.target).nextUntil("h3");
+	$("p").addClass("isHidden");
+	selected.filter("p").removeClass("isHidden");
 });
 
 $(document).keypress (function(event) {
@@ -84,7 +78,4 @@ $(document).keypress (function(event) {
 			});
 	}
 });
-
-
-
 

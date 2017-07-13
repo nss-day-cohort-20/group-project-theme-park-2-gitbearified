@@ -17,9 +17,22 @@
 }
 
 .wrapper{
-    width:90%;
+    width:98%;
     margin: 0 auto;
 }
 
+.isHidden {
+    display: none;
+}
 
+.attraction h3:hover {
+    text-decoration: underline;
+}
 
+h3 {
+    font-size: 1.5em;
+}
+
+h4 {
+    font-size: 1.2em;
+}
