@@ -27,7 +27,7 @@ attractionsFactory.getAttractions()
 		let newTypesObj = attractionsWithTypes.reformatTypeData(typesData);
 		attractions = attractionsWithTypes.giveAttractsTheirTypeName(newTypesObj, attractions);
 		showTimes();
-		console.log("getter", hoursGetter());
+		// console.log("getter", hoursGetter());
 	});
 
 
@@ -36,7 +36,7 @@ let uniqueTimesArray = [];
 let timesPM = [];
 let timesAM = [];
 let finalPMArray = [];
-let finalAMArray = []; 
+let finalAMArray = [];
 
 function showTimes () {
 	for (var key in attractions) {
@@ -68,7 +68,7 @@ function sortTimes (timesArray) {
 		} else {
 			timesAM.push(time);
 		}
-		
+
 	});
 	console.log("AM", timesAM);
 	takeOffAM(timesAM);
@@ -126,7 +126,7 @@ function rearrangePMs (arrayOfPMTimes) {
 	}
 		finalPMArray = noonerArray.concat(arrayOfPMTimes);
 		console.log("final PM array", finalPMArray);
-		hoursGetter(finalPMArray);
+		// hoursGetter(finalPMArray);
 }
 
 function objectify (amArray, PMarray) {
@@ -138,8 +138,7 @@ function objectify (amArray, PMarray) {
 
 timepicker.hoursGetter = function() {
 	return objectify(finalAMArray, finalPMArray);
-}
-
+};
 
 module.exports = timepicker;
 

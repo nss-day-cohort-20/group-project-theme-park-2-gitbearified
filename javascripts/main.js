@@ -100,6 +100,8 @@ $('#timepicker').change( function() {
 	}
 });
 
+ThemePark.DOMmanager.writeToDOM(new Date().getFullYear(), $('#copyright'));
+
 
 // ThemePark.DOMmanager.writeToDOM(attractionTemplate(selectedAttractions), $parkInfoDiv)
 
