@@ -69,6 +69,7 @@ $(".area-box").on("click", function() {
 		});
 });
 
-		// if(Object.keys(ThemePark.types.getAttrTypesObj()).length === 0) {
-			// ThemePark.types.getTypes();
-
+$(".parkInfo").on("click", function(event) {
+	let selected = $(event.target).nextUntil("h3");
+	selected.filter("p").toggleClass("isHidden");
+});
