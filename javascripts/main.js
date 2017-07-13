@@ -4,6 +4,8 @@ let $ = require('jquery');
 let Handlebars = require('hbsfy/runtime');
 let attractionTemplate = require('../templates/attractions.hbs');
 let $parkInfoDiv = $('.parkInfo');
+let search = require('./search.js');
+
 
 let ThemePark= {
 	areas: require ('./areas.js'),
@@ -55,8 +57,25 @@ $(".area-box").on("click", function() {
 		});
 });
 
+
 $(".parkInfo").on("click", function(event) {
 	let selected = $(event.target).nextUntil("h3");
 	$("p").addClass("isHidden");
 	selected.filter("p").removeClass("isHidden");
 });
+
+$(document).keypress (function(event) {
+	if (event.which == '13') {
+		event.preventDefault();
+		console.log("search val?", $('#search').val());
+		return ThemePark.attractions.getAttractions()
+			.then (function(allAttractions) {
+				return search.filterAttractions($('#search').val(), allAttractions);
+			})
+			.then (function(searchedAttractions) {
+				search.highlightAreas(searchedAttractions);
+				console.log("narrowed attractions", searchedAttractions);
+			});
+	}
+});
+
