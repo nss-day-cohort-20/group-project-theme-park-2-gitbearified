@@ -59,10 +59,7 @@ $(".area-box").on("click", function() {
 
 		})
 		.then(function(ParkInfoData){
-
-			//need parkInfo called here
 			ThemePark.dataProcessor.giveAttractsParkHours(ParkInfoData, selectedAttractions);
-			//need to modify selectedAttractions to have key value pair parkHours opening to closing
 			let attractions={selectedAttractions};//for handlebars
 			console.log ("attractions", attractions);
 			ThemePark.DOMmanager.writeToInfoBox(attractionTemplate(selectedAttractions));
@@ -71,5 +68,6 @@ $(".area-box").on("click", function() {
 
 $(".parkInfo").on("click", function(event) {
 	let selected = $(event.target).nextUntil("h3");
-	selected.filter("p").toggleClass("isHidden");
+	$("p").addClass("isHidden");
+	selected.filter("p").removeClass("isHidden");
 });
