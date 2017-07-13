@@ -23,6 +23,7 @@ attractionsFactory.getAttractions()
 		let newTypesObj = attractionsWithTypes.reformatTypeData(typesData);
 		attractions = attractionsWithTypes.giveAttractsTheirTypeName(newTypesObj, attractions);
 		showTimes();
+		console.log("getter", hoursGetter());
 	});
 
 
@@ -30,6 +31,8 @@ let allTimesArray = [];
 let uniqueTimesArray = [];
 let timesPM = [];
 let timesAM = [];
+let finalPMArray = [];
+let finalAMArray = []; 
 
 function showTimes () {
 	for (var key in attractions) {
@@ -86,37 +89,52 @@ function takeOffPM (arrayOfTimesToSliceUp) {
 		// console.log("item?", item);
 		return item.substr(0, item.length-2);
 	});
-	console.log("array without AM", nakedTimesPM);
+	console.log("array without PM", nakedTimesPM);
 	orderUpTimesPM(nakedTimesPM);
 }
 
-
 function orderUpTimesAM (timesArrayToPutInOrder) {
-	let timesInOrderAM = timesArrayToPutInOrder.sort(function (a, b) {
+	finalAMArray = timesArrayToPutInOrder.sort(function (a, b) {
 	    return Date.parse('01/01/2017 '+a) - Date.parse('01/01/2017 '+b);
 	});
-	console.log("are these in order?", timesInOrderAM);
 }
 
 function orderUpTimesPM (timesArrayToPutInOrder) {
 	let timesInOrderPM = timesArrayToPutInOrder.sort(function (a, b) {
 	    return Date.parse('01/01/2017 '+a) - Date.parse('01/01/2017 '+b);
 	});
-	console.log("are these in order?", timesInOrderPM);
+	rearrangePMs(timesInOrderPM);
 }
-//if it contains "am" psuh to this array
-//if it contains PM push to that array.
 
 
-	// console.log("attraction times", timesArray);
+function rearrangePMs (arrayOfPMTimes) {
+		let noonerArray = [];
+
+	for (let i=arrayOfPMTimes.length-1; i>1; i--) {
+		if (arrayOfPMTimes[i].match(/12:[0-9]*/g) !== null) {
+		let timeToMove = arrayOfPMTimes.pop(arrayOfPMTimes[i].match(/12:[0-9]*/g)[0]);
+		console.log("time to move", timeToMove);
+		noonerArray.unshift(timeToMove);
+		console.log("noonerArray", noonerArray);
+		let afternoonArray = arrayOfPMTimes;
+		console.log("afternoon array", afternoonArray);
+		}
+	}
+		finalPMArray = noonerArray.concat(arrayOfPMTimes);
+		console.log("final PM array", finalPMArray);
+		hoursGetter(finalPMArray);
+}
+
+function objectify (amArray, PMarray) {
+  return {
+  	AM: amArray,
+  	PM: PMarray
+  };
+}
+
+function hoursGetter () {
+	return objectify(finalAMArray, finalPMArray);
+}
 
 
-// function findAttractions (stringToSearch) {
-// 	console.log("string to search", stringToSearch);
-// 	for (var key in attractions) {
-// 		if (attractions[key].name.includes(stringToSearch)) {
-// 			newArray.push(attractions[key]);
-// 		}
-// 	}
-// 		console.log("show the results array", newArray);
-// } 
+// module.exports = {hoursGetter};
