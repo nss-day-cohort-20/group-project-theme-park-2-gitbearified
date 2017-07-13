@@ -64,9 +64,46 @@ function sortTimes (timesArray) {
 		
 	});
 	console.log("AM", timesAM);
+	takeOffAM(timesAM);
+	takeOffPM(timesPM);
 	console.log("PM", timesPM);
 }
 
+
+function takeOffAM (arrayOfTimesToSliceUp) {
+	console.log("times to slice", arrayOfTimesToSliceUp);
+	let nakedTimesAM = arrayOfTimesToSliceUp.map(function(item){
+		// console.log("item?", item);
+		return item.substr(0, item.length-2);
+	});
+	console.log("array without AM", nakedTimesAM);
+	orderUpTimesAM(nakedTimesAM);
+}
+
+function takeOffPM (arrayOfTimesToSliceUp) {
+	console.log("times to slice", arrayOfTimesToSliceUp);
+	let nakedTimesPM = arrayOfTimesToSliceUp.map(function(item){
+		// console.log("item?", item);
+		return item.substr(0, item.length-2);
+	});
+	console.log("array without AM", nakedTimesPM);
+	orderUpTimesPM(nakedTimesPM);
+}
+
+
+function orderUpTimesAM (timesArrayToPutInOrder) {
+	let timesInOrderAM = timesArrayToPutInOrder.sort(function (a, b) {
+	    return Date.parse('01/01/2017 '+a) - Date.parse('01/01/2017 '+b);
+	});
+	console.log("are these in order?", timesInOrderAM);
+}
+
+function orderUpTimesPM (timesArrayToPutInOrder) {
+	let timesInOrderPM = timesArrayToPutInOrder.sort(function (a, b) {
+	    return Date.parse('01/01/2017 '+a) - Date.parse('01/01/2017 '+b);
+	});
+	console.log("are these in order?", timesInOrderPM);
+}
 //if it contains "am" psuh to this array
 //if it contains PM push to that array.
 
