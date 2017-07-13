@@ -5,7 +5,7 @@
 // And the name should be a hyperlink
 
 'use strict';
-
+let timepicker = {};
 let $ = require ('jquery');
 
 let attractionsFactory = require ('./attractions.js');
@@ -14,6 +14,10 @@ let types = require ('./types.js');
 let newArray = [];
 let attractions = null;
 
+timepicker.getTimePickerValue = function() {
+	return $('#timepicker').val();
+
+};
 attractionsFactory.getAttractions()
 	.then (function(AttractionsObj) {
 		attractions = AttractionsObj;
@@ -132,9 +136,10 @@ function objectify (amArray, PMarray) {
   };
 }
 
-function hoursGetter () {
+timepicker.hoursGetter = function() {
 	return objectify(finalAMArray, finalPMArray);
 }
 
 
-// module.exports = {hoursGetter};
+module.exports = timepicker;
+
