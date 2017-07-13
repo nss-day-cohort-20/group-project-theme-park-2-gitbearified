@@ -8,4 +8,8 @@ DOMmanager.writeToDOM = function (stuffToPrint, whereToPrint) {
 	whereToPrint.html(stuffToPrint);
 };
 
+DOMmanager.removeAllHighlights = function(){
+  $('.area-box').removeClass("highlight");
+};
+
 module.exports = DOMmanager;

@@ -65,6 +65,16 @@ dataProcessor.giveAttractsTheirTypeName = function(newTypesObj, arrayOfAttractio
 	return attractionsArray;
 };
 
+
+dataProcessor.attractionsTime = function(attractions, time) {
+	attractions.map(function(object) {
+		if(object.hasOwnProperty('times') && object.times.indexOf(time) !== -1) {
+			return object;
+		}
+	});
+};
+// return an array of objects^^^^^^^^^
+
 //function to modify selected attractions to add key of hours to that object
 
 dataProcessor.giveAttractsParkHours = function(ParkInfoData, selectedAttractions){
