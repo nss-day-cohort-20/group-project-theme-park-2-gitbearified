@@ -14,7 +14,8 @@ let ThemePark= {
 	attractions: require ('./attractions.js'),
 	types: require ('./types.js'),
 	dataProcessor: require ('./data-processor.js'),
-	DOMmanager: require ('./DOM-manager.js')
+	DOMmanager: require ('./DOM-manager.js'),
+	timepicker: require ('./timepicker.js')
 };
 
 ThemePark.parkInfo.getParkInfo()
@@ -34,6 +35,11 @@ ThemePark.areas.getAreas()
 
 // on area click get id of div element
 $(".area-box").on("click", function() {
+	ThemePark.DOMmanager.removeAllHighlights();
+	let mapChoice = event.currentTarget;
+	console.log ("mapChoice",mapChoice);
+	$(mapChoice).addClass("highlight");
+
 	let idNumber = $(this).attr("id").match(/\d+/)[0];
 	var selectedAttractions;
 	return ThemePark.attractions.getAttractions()

@@ -29,9 +29,19 @@
     display: none;
 }
 
+
 .attraction h3:hover {
     text-decoration: underline;
 
+}
+
+.smallText{
+    font-size: .8em;
+    // text-decoration: none !important;
+}
+
+nav{
+    height:150px;
 }
 
 h3 {
