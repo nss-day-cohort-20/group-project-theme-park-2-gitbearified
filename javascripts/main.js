@@ -34,6 +34,11 @@ ThemePark.areas.getAreas()
 
 // on area click get id of div element
 $(".area-box").on("click", function() {
+	ThemePark.DOMmanager.removeAllHighlights();
+	let mapChoice = event.currentTarget;
+	console.log ("mapChoice",mapChoice);
+	$(mapChoice).addClass("highlight");
+
 	let idNumber = $(this).attr("id").match(/\d+/)[0];
 	var selectedAttractions;
 	return ThemePark.attractions.getAttractions()
