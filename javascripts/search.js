@@ -14,6 +14,7 @@ searchBar.filterAttractions = function(string, attractions) {
 };
 
 searchBar.highlightAreas = function(searchedAttractions) {
+	$('.area-box').removeClass("highlight");
 	searchedAttractions.map(function(object) {
 		console.log("right box?", $(`#grid${object.area_id}`));
 
