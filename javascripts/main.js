@@ -10,7 +10,8 @@ let ThemePark= {
 	attractions: require ('./attractions.js'),
 	types: require ('./types.js'),
 	dataProcessor: require ('./data-processor.js'),
-	DOMmanager: require ('./DOM-manager.js')
+	DOMmanager: require ('./DOM-manager.js'),
+	timepicker: require ('./timepicker.js')
 };
 
 
