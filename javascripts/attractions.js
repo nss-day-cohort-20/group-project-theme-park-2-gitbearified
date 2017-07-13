@@ -10,7 +10,7 @@ attractions.getAttractions = function() {
 			url: 'https://gitbearified.firebaseio.com/attractions.json'
 		})
 		.done(function(data) {
-			resolve(data);
+			resolve(Object.values(data));
 		})
 		.fail(function(error) {
 			console.log(error.statusText);
