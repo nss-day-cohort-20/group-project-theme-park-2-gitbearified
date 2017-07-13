@@ -4,11 +4,8 @@ let $ = require('jquery');
 
 let DOMmanager = Object.create(null);
 
-let $parkInfoDiv = $('.parkInfo');
-
-DOMmanager.writeToInfoBox = function (stuffToPrint) {
-	// console.log("stuff passed in", stuffToPrint);
-	$parkInfoDiv.html(stuffToPrint);
+DOMmanager.writeToDOM = function (stuffToPrint, whereToPrint) {
+	whereToPrint.html(stuffToPrint);
 };
 
 module.exports = DOMmanager;

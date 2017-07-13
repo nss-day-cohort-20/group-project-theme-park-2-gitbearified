@@ -73,8 +73,6 @@ dataProcessor.giveAttractsParkHours = function(ParkInfoData, selectedAttractions
 	selectedAttractions.forEach(function(attraction){
 		attraction.hours= [`Opens:${ParkInfoData[0].operating_hours[0].opening}:00 AM`, `Closes:${ParkInfoData[0].operating_hours[0].closing}:00 PM`];//string for each ?
 	});
-
-
 };
 
 

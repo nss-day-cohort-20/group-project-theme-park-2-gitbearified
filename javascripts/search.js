@@ -1,35 +1,25 @@
 'use strict';
 
-let $ = require ('jquery');
+let $ = require('jquery');
 
-let attractionsFactory = require ('./attractions.js');
-let attractionsWithTypes = require ('./data-processor.js');
-let types = require ('./types.js');
-let newArray = [];
-let attractions = null;
+let searchBar = {};
 
-attractionsFactory.getAttractions()
-	.then (function(AttractionsObj) {
-		attractions = AttractionsObj;
-		return types.getTypes();
-	})
-	.then (function(typesData) {
-		let newTypesObj = attractionsWithTypes.reformatTypeData(typesData);
-		attractions = attractionsWithTypes.giveAttractsTheirTypeName(newTypesObj, attractions);
-		findAttractions("Railroad");
+searchBar.filterAttractions = function(string, attractions) {
+	return new Promise(function(resolve, reject) {
+		let newArr = attractions.filter(function(object) {
+			return object.name.match(new RegExp(string, "i"));
+		});
+		resolve(newArr);
 	});
+};
 
-function findAttractions (stringToSearch) {
-	console.log("string to search", stringToSearch);
-	for (var key in attractions) {
-		if (attractions[key].name.includes(stringToSearch)) {
-			newArray.push(attractions[key]);
-		}
-	}
-		console.log("show the results array", newArray);
-} 
+searchBar.highlightAreas = function(searchedAttractions) {
+	$('.area-box').removeClass("highlight");
+	searchedAttractions.map(function(object) {
+		console.log("right box?", $(`#grid${object.area_id}`));
 
+		$(`#grid${object.area_id}`).addClass('highlight');
+	});
+};
 
-// let newArr = Object.values(attractions);
-// iterate over an array of objects, using each object's name value as a string and using some string prototype thing to find if the name includes the input string by the user.
-
+module.exports  = searchBar;
