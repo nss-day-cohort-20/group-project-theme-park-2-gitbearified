@@ -3,6 +3,7 @@
 let $ = require('jquery');
 let Handlebars = require('hbsfy/runtime');
 let attractionTemplate = require('../templates/attractions.hbs');
+let optionsTemplate = require('../templates/options.hbs');
 let $parkInfoDiv = $('.parkInfo');
 let search = require('./search.js');
 
@@ -30,6 +31,12 @@ ThemePark.areas.getAreas()
 	 ThemePark.dataProcessor.attachColorToMapSquares(areasData);
 	 ThemePark.dataProcessor.attachNameToMapSquares(areasData);
 });
+
+//add function to get times here, then write to dom function:
+// .then(function(data){
+// 	let optionsData = data;
+// ThemePark.DOMmanager.writeToDOM(optionsTemplate(    ), $('#timepicker'));
+// });
 
 // on area click get id of div element
 $(".area-box").on("click", function() {
