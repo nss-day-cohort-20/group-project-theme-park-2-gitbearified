@@ -21,12 +21,16 @@
     margin: 0 auto;
 }
 
+.highlight {
+    border: 2px solid goldenrod;
+
 .isHidden {
     display: none;
 }
 
 .attraction h3:hover {
     text-decoration: underline;
+
 }
 
 h3 {
