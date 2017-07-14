@@ -79,6 +79,7 @@ $(document).keypress (function(event) {
 				return search.filterAttractions($('#search').val(), allAttractions);
 			})
 			.then (function(searchedAttractions) {
+				$('#search').val("");
 				search.highlightAreas(searchedAttractions);
 				console.log("narrowed attractions", searchedAttractions);
 			});
