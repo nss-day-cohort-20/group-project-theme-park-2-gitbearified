@@ -30,7 +30,6 @@ timepicker.attractionsTime = function(attractions, time) {
 	return narrowedByTime;
 };
 
-
 //get the attractions objects with their types, then call the next function at the end of the promise
 };
 

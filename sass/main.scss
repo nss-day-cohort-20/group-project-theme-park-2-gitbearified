@@ -1,21 +1,31 @@
-.infoBox{
-    background-color: bisque;
-    height:90%;
-    width:30%;
-    margin-right:2%;
+$happyRed: #ce373a;
+$happyBlue: #025cac;
+$happyYellow: #fed101;
+
+/***** body *****/
+
+#main {
+    min-height: 100%;
+}
+
+.wrapper {
+    margin: 0 auto;
     overflow: auto;
+    padding-bottom: 95px;
+}
+
+
+/***** nav *****/
+
+nav {
+    height:150px;
+    box-shadow: 2px 0 10px gray;
 }
 
 .timepicker {
     margin-top: 8px;
     height: 34px;
     border-radius: 4px;
-}
-
-.map{
-   height: 90%;
-   min-width: 640px;
-   min-height: 640px;
 }
 
 .search-methods {
@@ -25,55 +35,86 @@
     width: 400px;
 }
 
-.block{
-    height:30%;
-    width:30%;
-    border: 1px solid black;
+/***** info box *****/
+
+.infoBox {
+    background-color: $happyYellow;
+    height:600px;
+    overflow: auto;
+    border: 2px solid #CBA700;
+}
+  
+
+
+.attraction h3 {
+    font-size: 1.5em;
+    cursor: pointer;
 }
 
-.wrapper{
-    width:98%;
-    margin: 0 auto;
+.attraction h3:hover {
+    color: $happyBlue;
 }
 
-.highlight {
-    border: 3px outset lightblue;
-    box-shadow: -2px -2px 20px black;
+.smallText {
+    font-size: .8em;
 }
+
+/***** map area *****/
+ 
+.block {
+    height:200px;
+}
+
+section {
+    background-image: url("../images/magic-kingdom.jpg");
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: cover;
+}
+
+.mapNames {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.25em;
+    text-transform: uppercase;
+    background-color: $happyBlue;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: hand;
+    margin-top: 75px;
+}
+
+/***** footer *****/
+
+.footer {
+    position: relative;
+    margin-top: -60px;
+    height: 60px;
+    clear: both;
+    padding-top:20px;
+    background-color: $happyBlue;
+    border-top: 2px solid #014989;
+}
+
+ul {
+    margin-left: 5%;
+}
+
+li {
+    list-style-type: none;
+    display: inline;
+    padding-left: 20px;
+    color: #fff;
+}
+
+/***** dynamic *****/
 
 .isHidden {
     display: none;
 }
 
-
-.attraction h3:hover {
-    text-decoration: underline;
-
+.highlight {
+    border: 1px solid black;
 }
 
-.smallText{
-    font-size: .8em;
-    // text-decoration: none !important;
-}
-
-nav{
-    height:150px;
-    box-shadow: 2px 0 10px gray;
-}
-
-h3 {
-    font-size: 1.5em;
-}
-
-h4 {
-    font-size: 1.2em;
-}
-
-.area-box {
-    min-width: 192px;
-    min-height: 192px;
-}
-
-footer {
-    text-align: center;
-}

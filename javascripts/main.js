@@ -90,7 +90,7 @@ $(document).keypress (function(event) {
 				return search.filterAttractions($('#search').val(), allAttractions);
 			})
 			.then (function(searchedAttractions) {
-
+				$('#search').val("");
 				search.highlightAreas(searchedAttractions);
 			});
 	}
@@ -109,6 +109,8 @@ $('#timepicker').change( function() {
 		});
 	}
 });
+
+ThemePark.DOMmanager.writeToDOM(new Date().getFullYear(), $('#copyright'));
 
 
 // ThemePark.DOMmanager.writeToDOM(attractionTemplate(selectedAttractions), $parkInfoDiv)

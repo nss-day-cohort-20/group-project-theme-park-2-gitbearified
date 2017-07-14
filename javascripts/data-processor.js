@@ -16,9 +16,10 @@ dataProcessor.parkInfoOnLoad = function (ParkInfoData) {
 
 dataProcessor.attachColorToMapSquares = function(areasData){
 	// let $divArray= $('section.map').find('.mapSq');//stores all the divs with mapSq class
-	 let counter= 1;
+	let counter= 1;
 	for (let item in areasData) {
-		$(`#grid${counter}`).css('background-color', `${areasData[item].colorTheme}`);
+		$(`#grid${counter}`).css('border-color', `${areasData[item].colorTheme}`);
+		$(`#grid${counter}`).css('border-width', `8px`);
 		counter++;
 	}
 };
@@ -26,8 +27,14 @@ dataProcessor.attachColorToMapSquares = function(areasData){
 dataProcessor.attachNameToMapSquares = function(areasData) {
 	let counter = 1;
 	for (let item in areasData) {
-		$(`#grid${counter}`).attr("title", `${areasData[item].name}`);
-		$(`#grid${counter}`).html(`<h2>${areasData[item].name}</h2>`);
+		for (let i = 0; i < Object.keys(areasData[item]).length; i++) {
+			if (Object.keys(areasData[item])[i] === "description") {
+				$(`#grid${counter}`).attr("title", `${areasData[item].description}`);
+			} else if (Object.keys(areasData[item])[i] === "decription") {
+				$(`#grid${counter}`).attr("title", `${areasData[item].decription}`);
+			}
+		}
+		$(`#grid${counter}`).html(`<h3 class="mapNames">${areasData[item].name}</h3>`);
 		counter ++;
 	}
 };
@@ -64,10 +71,6 @@ dataProcessor.giveAttractsTheirTypeName = function(newTypesObj, arrayOfAttractio
 	return attractionsArray;
 };
 
-
-
-
-// return an array of objects^^^^^^^^^
 
 //function to modify selected attractions to add key of hours to that object
 
