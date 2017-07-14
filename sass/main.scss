@@ -2,45 +2,51 @@ $happyRed: #ce373a;
 $happyBlue: #025cac;
 $happyYellow: #fed101;
 
-.infoBox{
-    background-color: $happyYellow;
-    height:600px;
-    overflow: auto;
+/***** body *****/
+
+#main {
+    min-height: 100%;
 }
 
-.block{
-    height:200px;
-    border: 1px solid black;
-}
-
-.wrapper{
-    width:90%;
+.wrapper {
     margin: 0 auto;
+    overflow: auto;
+    padding-bottom: 95px;
 }
 
-.isHidden {
-    display: none;
-}
+/***** nav *****/
 
-.attraction h3:hover {
-    text-decoration: underline;
-}
-
-.smallText{
-    font-size: .8em;
-}
-
-nav{
+nav {
     height:150px;
 }
 
-h3 {
+/***** info box *****/
+
+.infoBox {
+    background-color: $happyYellow;
+    height:600px;
+    overflow: auto;
+    border: 1px solid #CBA700;
+}
+
+.attraction h3 {
     font-size: 1.5em;
     cursor: pointer;
 }
 
-h4 {
-    font-size: 1.2em;
+.attraction h3:hover {
+    color: $happyBlue;
+}
+
+.smallText {
+    font-size: .8em;
+}
+
+/***** map area *****/
+
+.block {
+    height:200px;
+    border: 1px solid black;
 }
 
 section {
@@ -61,6 +67,36 @@ section {
     cursor: hand;
 }
 
+/***** footer *****/
+
+.footer {
+    position: relative;
+    margin-top: -60px;
+    height: 60px;
+    clear: both;
+    padding-top:20px;
+    background-color: $happyRed;
+    border-top: 1px solid #902628;
+}
+
+ul {
+    margin-left: 5%;
+}
+
+li {
+    list-style-type: none;
+    display: inline;
+    padding-left: 20px;
+    color: #fff;
+}
+
+/***** dynamic *****/
+
+.isHidden {
+    display: none;
+}
+
 .highlight {
     background: $happyRed;
 }
+
