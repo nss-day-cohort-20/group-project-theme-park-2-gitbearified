@@ -37,7 +37,6 @@ ThemePark.areas.getAreas()
 $(".area-box").on("click", function() {
 	ThemePark.DOMmanager.removeAllHighlights();
 	let mapChoice = event.currentTarget;
-	console.log ("mapChoice",mapChoice);
 	$(mapChoice).addClass("highlight");
 
 	let idNumber = $(this).attr("id").match(/\d+/)[0];
@@ -93,10 +92,7 @@ $('#timepicker').change( function() {
 		ThemePark.attractions.getAttractions()
 		.then(function(attractions){
 			ThemePark.dataProcessor.attractionsTime(attractions, time);
-
 		});
-
-
 	}
 });
 

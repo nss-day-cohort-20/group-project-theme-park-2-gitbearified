@@ -1,43 +1,33 @@
+$happyRed: #ce373a;
+$happyBlue: #025cac;
+$happyYellow: #fed101;
+
 .infoBox{
-    background-color: bisque;
-    height:80%;
-    width:30%;
-    margin-right:2%;
+    background-color: $happyYellow;
+    height:600px;
     overflow: auto;
 }
 
-.map{
-   height: 90%;
-}
-
 .block{
-    height:30%;
-    width:30%;
+    height:200px;
     border: 1px solid black;
 }
 
 .wrapper{
-    width:98%;
+    width:90%;
     margin: 0 auto;
-}
-
-.highlight {
-    border: 2px solid goldenrod;
 }
 
 .isHidden {
     display: none;
 }
 
-
 .attraction h3:hover {
     text-decoration: underline;
-
 }
 
 .smallText{
     font-size: .8em;
-    // text-decoration: none !important;
 }
 
 nav{
@@ -46,8 +36,31 @@ nav{
 
 h3 {
     font-size: 1.5em;
+    cursor: pointer;
 }
 
 h4 {
     font-size: 1.2em;
+}
+
+section {
+    background-image: url("../images/magic-kingdom.jpg");
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: cover;
+}
+
+.mapNames {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: $happyBlue;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: hand;
+}
+
+.highlight {
+    background: $happyRed;
 }
