@@ -102,7 +102,7 @@ $('#timepicker').change( function() {
 	if (time !== "--select a time--") {
 		ThemePark.attractions.getAttractions()
 		.then(function(attractions){
-			return timepicker.attractionsTime(attractions, time);
+			return ThemePark.timepicker.attractionsTime(attractions, time);
 		})
 		.then(function(attractionObjectArrayByTime) {
 			console.log("array of attractions by time", attractionObjectArrayByTime);

@@ -31,7 +31,6 @@ timepicker.attractionsTime = function(attractions, time) {
 };
 
 //get the attractions objects with their types, then call the next function at the end of the promise
-};
 
 let allTimesArray = [];
 let uniqueTimesArray = [];
@@ -49,7 +48,7 @@ timepicker.showTimes = function (attractions) {
 	}
 	
  	makeArrayOfPossTimes(allTimesArray);
-}
+};
 
 //make sure times are unique and do not repeat
 function makeArrayOfPossTimes (bigArray) {
