@@ -98,15 +98,22 @@ $(document).keypress (function(event) {
 });
 
 
-$('#timepicker').change( function() {
-	let time = $('#timepicker').val();
+$('.select-time').change( function() {
+	let time = $(this).val();
+	console.log("this", $(this).val());
+
 	if (time !== "--select a time--") {
 		ThemePark.attractions.getAttractions()
 		.then(function(attractions){
 			return ThemePark.timepicker.attractionsTime(attractions, time);
 		})
 		.then(function(attractionObjectArrayByTime) {
-			console.log("array of attractions by time", attractionObjectArrayByTime);
+			let typesData = ThemePark.types.getTypes();
+			let newTypesObj = ThemePark.dataProcessor.reformatTypeData(typesData);
+			let selectedAttractionsByTime = ThemePark.dataProcessor.giveAttractsTheirTypeName(newTypesObj, attractionObjectArrayByTime);
+
+			ThemePark.DOMmanager.writeToDOM(attractionTemplate(selectedAttractionsByTime), $parkInfoDiv);
+
 		});
 	}
 });
