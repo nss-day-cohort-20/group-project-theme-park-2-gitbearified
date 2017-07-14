@@ -3,10 +3,9 @@
 let $ = require('jquery');
 let Handlebars = require('hbsfy/runtime');
 let attractionTemplate = require('../templates/attractions.hbs');
+// let optionsTemplate = require('../templates/options.hbs');
 let $parkInfoDiv = $('.parkInfo');
 let search = require('./search.js');
-let timepicker = require('./timepicker.js');
-
 
 let ThemePark= {
 	areas: require ('./areas.js'),
@@ -33,12 +32,26 @@ ThemePark.areas.getAreas()
 	 ThemePark.dataProcessor.attachNameToMapSquares(areasData);
 });
 
+
+Promise.all([ThemePark.attractions.getAttractions(),ThemePark.types.getTypes() ])
+.then (function([AttractionsObj, typesData]) {
+	let newTypesObj = ThemePark.dataProcessor.reformatTypeData(typesData);
+	let attractions = ThemePark.dataProcessor.giveAttractsTheirTypeName(newTypesObj, AttractionsObj);
+	ThemePark.timepicker.showTimes(attractions);
+	let optionsData = ThemePark.timepicker.hoursGetter();
+	console.log ("optionsData", optionsData);
+
+});
+
+// ThemePark.DOMmanager.writeToDOM(optionsTemplate(finalAMArray ), $('#AMtimepicker'));
+// ThemePark.DOMmanager.writeToDOM(optionsTemplate( finalPMArray  ), $('#PMtimepicker'));
+
+
 // on area click get id of div element
 $(".area-box").on("click", function() {
 	ThemePark.DOMmanager.removeAllHighlights();
 	let mapChoice = event.currentTarget;
 	$(mapChoice).addClass("highlight");
-
 	let idNumber = $(this).attr("id").match(/\d+/)[0];
 	var selectedAttractions;
 	return ThemePark.attractions.getAttractions()
@@ -53,12 +66,11 @@ $(".area-box").on("click", function() {
 			let newTypesObj = ThemePark.dataProcessor.reformatTypeData(typesData);
 			selectedAttractions = ThemePark.dataProcessor.giveAttractsTheirTypeName(newTypesObj, selectedAttractions);
 			return ThemePark.parkInfo.getParkInfo();
-
 		})
 		.then(function(ParkInfoData){
 			ThemePark.dataProcessor.giveAttractsParkHours(ParkInfoData, selectedAttractions);
+			console.log("after", selectedAttractions);
 			let attractions={selectedAttractions};//for handlebars
-			console.log ("attractions", attractions);
 			ThemePark.DOMmanager.writeToDOM(attractionTemplate(selectedAttractions), $parkInfoDiv);
 		});
 });
@@ -73,7 +85,6 @@ $(".parkInfo").on("click", function(event) {
 $(document).keypress (function(event) {
 	if (event.which == '13') {
 		event.preventDefault();
-		console.log("search val?", $('#search').val());
 		return ThemePark.attractions.getAttractions()
 			.then (function(allAttractions) {
 				return search.filterAttractions($('#search').val(), allAttractions);
@@ -81,7 +92,6 @@ $(document).keypress (function(event) {
 			.then (function(searchedAttractions) {
 				$('#search').val("");
 				search.highlightAreas(searchedAttractions);
-				console.log("narrowed attractions", searchedAttractions);
 			});
 	}
 });
@@ -92,7 +102,10 @@ $('#timepicker').change( function() {
 	if (time !== "--select a time--") {
 		ThemePark.attractions.getAttractions()
 		.then(function(attractions){
-			ThemePark.dataProcessor.attractionsTime(attractions, time);
+			return timepicker.attractionsTime(attractions, time);
+		})
+		.then(function(attractionObjectArrayByTime) {
+			console.log("array of attractions by time", attractionObjectArrayByTime);
 		});
 	}
 });

@@ -72,20 +72,10 @@ dataProcessor.giveAttractsTheirTypeName = function(newTypesObj, arrayOfAttractio
 };
 
 
-dataProcessor.attractionsTime = function(attractions, time) {
-	attractions.map(function(object) {
-		if(object.hasOwnProperty('times') && object.times.indexOf(time) !== -1) {
-			return object;
-		}
-	});
-};
-// return an array of objects^^^^^^^^^
-
 //function to modify selected attractions to add key of hours to that object
 
 dataProcessor.giveAttractsParkHours = function(ParkInfoData, selectedAttractions){
-	console.log ("ParkInfoData", ParkInfoData[0].operating_hours);
-	console.log ("selectedAttractions",selectedAttractions);
+	console.log("before", selectedAttractions);
 	selectedAttractions.forEach(function(attraction){
 		attraction.hours= [`Opens:${ParkInfoData[0].operating_hours[0].opening}:00 AM`, `Closes:${ParkInfoData[0].operating_hours[0].closing}:00 PM`];//string for each ?
 	});

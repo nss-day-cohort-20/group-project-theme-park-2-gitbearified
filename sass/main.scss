@@ -14,10 +14,18 @@ $happyYellow: #fed101;
     padding-bottom: 95px;
 }
 
+
 /***** nav *****/
 
 nav {
     height:150px;
+    box-shadow: 2px 0 10px gray;
+}
+
+.timepicker {
+    margin-top: 8px;
+    height: 34px;
+    border-radius: 4px;
 }
 
 .search-methods {
@@ -35,6 +43,8 @@ nav {
     overflow: auto;
     border: 2px solid #CBA700;
 }
+  
+
 
 .attraction h3 {
     font-size: 1.5em;
@@ -50,7 +60,7 @@ nav {
 }
 
 /***** map area *****/
-
+ 
 .block {
     height:200px;
 }
