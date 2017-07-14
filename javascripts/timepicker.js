@@ -15,8 +15,12 @@ let optionsTemplate = require('../templates/options.hbs');
 let newArray = [];
 let attractions = null;
 
-timepicker.getTimePickerValue = function() {
-	return $('#timepicker').val();
+timepicker.getTimePickerValueAM = function() {
+	return $('#AMtimepicker').val();
+};
+
+timepicker.getTimePickerValuePM = function() {
+	return $('#PMtimepicker').val();
 };
 
 timepicker.attractionsTime = function(attractions, time) {
@@ -46,7 +50,7 @@ timepicker.showTimes = function (attractions) {
 		 	allTimesArray = [...allTimesArray, ...attrTime];
 		 	}
 	}
-	
+
  	makeArrayOfPossTimes(allTimesArray);
 };
 
