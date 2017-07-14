@@ -27,7 +27,13 @@ dataProcessor.attachColorToMapSquares = function(areasData){
 dataProcessor.attachNameToMapSquares = function(areasData) {
 	let counter = 1;
 	for (let item in areasData) {
-		$(`#grid${counter}`).attr("title", `${areasData[item].name}`);
+		for (let i = 0; i < Object.keys(areasData[item]).length; i++) {
+			if (Object.keys(areasData[item])[i] === "description") {
+				$(`#grid${counter}`).attr("title", `${areasData[item].description}`);
+			} else if (Object.keys(areasData[item])[i] === "decription") {
+				$(`#grid${counter}`).attr("title", `${areasData[item].decription}`);
+			}
+		}
 		$(`#grid${counter}`).html(`<h3 class="mapNames">${areasData[item].name}</h3>`);
 		counter ++;
 	}
