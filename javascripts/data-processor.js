@@ -19,7 +19,7 @@ dataProcessor.attachColorToMapSquares = function(areasData){
 	let counter= 1;
 	for (let item in areasData) {
 		$(`#grid${counter}`).css('border-color', `${areasData[item].colorTheme}`);
-		$(`#grid${counter}`).css('border-width', `3px`);
+		$(`#grid${counter}`).css('border-width', `8px`);
 		counter++;
 	}
 };

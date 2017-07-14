@@ -9,7 +9,7 @@
 </head>
 <body>
   <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -22,39 +22,39 @@
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-left">
-          <div class="form-group">
-            <input id="search" type="text" class="form-control" placeholder="Search">
-          </div>
-        </form>
-        <select id="timepicker">
-          <option>--select a time--</option>
-        </select>
+        <div class="search-methods">
+          <input id="search" type="text" class="form-control" placeholder="Search attractions">
+        </div><!-- /.search-methods -->
+        <div class="search-methods">
+          <select id="timepicker">
+            <option>--select a time--</option>
+          </select>
+        </div>
       </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+    </div><!-- /.container -->
   </nav>
   <div id="main" class="container">
     <div class="row wrapper">
       <aside class="col-md-4">
         <div class="col-md-12 infoBox">
-          <div class="parkInfo">Put park info here</div>
+          <div class="parkInfo"></div>
         </div>
       </aside>
       <section class="col-md-8">
         <div class="row">
-          <div id="grid1" class="col-md-4 block area-box mapSq">1</div>
-          <div id="grid2" class="col-md-4 block area-box mapSq">2</div>
-          <div id="grid3" class="col-md-4 block area-box mapSq">3</div>
+          <div id="grid1" class="col-md-4 block area-box mapSq"></div>
+          <div id="grid2" class="col-md-4 block area-box mapSq"></div>
+          <div id="grid3" class="col-md-4 block area-box mapSq"></div>
         </div>
         <div class="row">
-          <div id="grid4" class="col-md-4 block area-box mapSq">4</div>
-          <div id="gridblank" class="col-md-4 block area-box">*</div>
-          <div id="grid5" class="col-md-4 block area-box mapSq">5</div>
+          <div id="grid4" class="col-md-4 block area-box mapSq"></div>
+          <div id="gridblank" class="col-md-4 block area-box"></div>
+          <div id="grid5" class="col-md-4 block area-box mapSq"></div>
         </div>
         <div class="row">
-          <div id="grid6" class="col-md-4 block area-box mapSq">6</div>
-          <div id="grid7" class="col-md-4 block area-box mapSq">7</div>
-          <div id="grid8" class="col-md-4 block area-box mapSq">8</div>
+          <div id="grid6" class="col-md-4 block area-box mapSq"></div>
+          <div id="grid7" class="col-md-4 block area-box mapSq"></div>
+          <div id="grid8" class="col-md-4 block area-box mapSq"></div>
         </div>
       </section>
     </div><!-- /.row -->
