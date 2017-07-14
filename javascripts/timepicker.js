@@ -17,6 +17,18 @@ let attractions = null;
 
 timepicker.getTimePickerValue = function() {
 	return $('#timepicker').val();
+};
+
+timepicker.attractionsTime = function(attractions, time) {
+	console.log("attractions", attractions, "time", time);
+	let narrowedByTime = attractions.filter(function(object) {
+		if (object.hasOwnProperty('times') && object.times.indexOf(time) !== -1) {
+			return object;
+		}
+	});
+	console.log("narrowed by time", narrowedByTime);
+	return narrowedByTime;
+};
 
 
 //get the attractions objects with their types, then call the next function at the end of the promise
@@ -47,7 +59,7 @@ function makeArrayOfPossTimes (bigArray) {
 			uniqueTimesArray.push(item);
 		}
 	});
- 	console.log("times array", uniqueTimesArray);
+ 	// console.log("times array", uniqueTimesArray);
 	sortTimes(uniqueTimesArray);
 }
 
@@ -61,26 +73,28 @@ function sortTimes (timesArray) {
 		}
 
 	});
-	console.log("AM", timesAM);
+	// console.log("AM", timesAM);
 	takeOffAM(timesAM);
 	takeOffPM(timesPM);
-	console.log("PM", timesPM);
+	// console.log("PM", timesPM);
 }
 
 //cut the letters off each array of times (am/pm)
 function takeOffAM (arrayOfTimesToSliceUp) {
-	console.log("times to slice", arrayOfTimesToSliceUp);
+	// console.log("times to slice", arrayOfTimesToSliceUp);
 	let nakedTimesAM = arrayOfTimesToSliceUp.map(function(item){
 		return item.substr(0, item.length-2);
 	});
-	orderUpTimesAM(nakedTimesAM);
+
+  orderUpTimesAM(nakedTimesAM);
 }
 
 function takeOffPM (arrayOfTimesToSliceUp) {
-	console.log("times to slice", arrayOfTimesToSliceUp);
+	// console.log("times to slice", arrayOfTimesToSliceUp);
 	let nakedTimesPM = arrayOfTimesToSliceUp.map(function(item){
 		return item.substr(0, item.length-2);
 	});
+
 	orderUpTimesPM(nakedTimesPM);
 }
 
@@ -104,6 +118,7 @@ function rearrangePMs (arrayOfPMTimes) {
 	let noonerArray = [];
 	for (let i=arrayOfPMTimes.length-1; i>1; i--) {
 		if (arrayOfPMTimes[i].match(/12:[0-9]*/g) !== null) {
+
 			let timeToMove = arrayOfPMTimes.pop(arrayOfPMTimes[i].match(/12:[0-9]*/g)[0]);
 			noonerArray.unshift(timeToMove);
 			let afternoonArray = arrayOfPMTimes;
@@ -126,7 +141,6 @@ function objectify (amArray, PMarray) {
 //make hours available to rest of app
 timepicker.hoursGetter = function() {
 		return objectify(finalAMArray, finalPMArray);
-
 };
 
 
