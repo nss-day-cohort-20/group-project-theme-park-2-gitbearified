@@ -3,7 +3,8 @@
 let $ = require('jquery');
 let Handlebars = require('hbsfy/runtime');
 let attractionTemplate = require('../templates/attractions.hbs');
-// let optionsTemplate = require('../templates/options.hbs');
+let optionsTemplate = require('../templates/options.hbs');
+let optionsTemplatePM = require('../templates/optionsPM.hbs');
 let $parkInfoDiv = $('.parkInfo');
 let search = require('./search.js');
 
@@ -40,11 +41,11 @@ Promise.all([ThemePark.attractions.getAttractions(),ThemePark.types.getTypes() ]
 	ThemePark.timepicker.showTimes(attractions);
 	let optionsData = ThemePark.timepicker.hoursGetter();
 	console.log ("optionsData", optionsData);
-
+	ThemePark.DOMmanager.writeToDOM(optionsTemplate(optionsData.AM), $('#AMtimepicker'));
+	ThemePark.DOMmanager.writeToDOM(optionsTemplatePM(optionsData.PM), $('#PMtimepicker'));
 });
 
-// ThemePark.DOMmanager.writeToDOM(optionsTemplate(finalAMArray ), $('#AMtimepicker'));
-// ThemePark.DOMmanager.writeToDOM(optionsTemplate( finalPMArray  ), $('#PMtimepicker'));
+
 
 
 // on area click get id of div element
