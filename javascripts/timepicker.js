@@ -16,8 +16,20 @@ let attractions = null;
 
 timepicker.getTimePickerValue = function() {
 	return $('#timepicker').val();
-
 };
+
+timepicker.attractionsTime = function(attractions, time) {
+	console.log("attractions", attractions, "time", time);
+	let narrowedByTime = attractions.filter(function(object) {
+		if (object.hasOwnProperty('times') && object.times.indexOf(time) !== -1) {
+			return object;
+		}
+	});
+	console.log("narrowed by time", narrowedByTime);
+	return narrowedByTime;
+};
+
+
 attractionsFactory.getAttractions()
 	.then (function(AttractionsObj) {
 		attractions = AttractionsObj;
@@ -27,7 +39,7 @@ attractionsFactory.getAttractions()
 		let newTypesObj = attractionsWithTypes.reformatTypeData(typesData);
 		attractions = attractionsWithTypes.giveAttractsTheirTypeName(newTypesObj, attractions);
 		showTimes();
-		console.log("getter", hoursGetter());
+		console.log("getter", timepicker.hoursGetter());
 	});
 
 
@@ -36,7 +48,7 @@ let uniqueTimesArray = [];
 let timesPM = [];
 let timesAM = [];
 let finalPMArray = [];
-let finalAMArray = []; 
+let finalAMArray = [];
 
 function showTimes () {
 	for (var key in attractions) {
@@ -57,7 +69,7 @@ function makeArrayOfPossTimes (bigArray) {
 			uniqueTimesArray.push(item);
 		}
 	});
- 	console.log("times array", uniqueTimesArray);
+ 	// console.log("times array", uniqueTimesArray);
 	sortTimes(uniqueTimesArray);
 }
 
@@ -68,32 +80,32 @@ function sortTimes (timesArray) {
 		} else {
 			timesAM.push(time);
 		}
-		
+
 	});
-	console.log("AM", timesAM);
+	// console.log("AM", timesAM);
 	takeOffAM(timesAM);
 	takeOffPM(timesPM);
-	console.log("PM", timesPM);
+	// console.log("PM", timesPM);
 }
 
 
 function takeOffAM (arrayOfTimesToSliceUp) {
-	console.log("times to slice", arrayOfTimesToSliceUp);
+	// console.log("times to slice", arrayOfTimesToSliceUp);
 	let nakedTimesAM = arrayOfTimesToSliceUp.map(function(item){
 		// console.log("item?", item);
 		return item.substr(0, item.length-2);
 	});
-	console.log("array without AM", nakedTimesAM);
+	// console.log("array without AM", nakedTimesAM);
 	orderUpTimesAM(nakedTimesAM);
 }
 
 function takeOffPM (arrayOfTimesToSliceUp) {
-	console.log("times to slice", arrayOfTimesToSliceUp);
+	// console.log("times to slice", arrayOfTimesToSliceUp);
 	let nakedTimesPM = arrayOfTimesToSliceUp.map(function(item){
 		// console.log("item?", item);
 		return item.substr(0, item.length-2);
 	});
-	console.log("array without PM", nakedTimesPM);
+	// console.log("array without PM", nakedTimesPM);
 	orderUpTimesPM(nakedTimesPM);
 }
 
@@ -117,16 +129,16 @@ function rearrangePMs (arrayOfPMTimes) {
 	for (let i=arrayOfPMTimes.length-1; i>1; i--) {
 		if (arrayOfPMTimes[i].match(/12:[0-9]*/g) !== null) {
 		let timeToMove = arrayOfPMTimes.pop(arrayOfPMTimes[i].match(/12:[0-9]*/g)[0]);
-		console.log("time to move", timeToMove);
+		// console.log("time to move", timeToMove);
 		noonerArray.unshift(timeToMove);
-		console.log("noonerArray", noonerArray);
+		// console.log("noonerArray", noonerArray);
 		let afternoonArray = arrayOfPMTimes;
-		console.log("afternoon array", afternoonArray);
+		// console.log("afternoon array", afternoonArray);
 		}
 	}
 		finalPMArray = noonerArray.concat(arrayOfPMTimes);
-		console.log("final PM array", finalPMArray);
-		hoursGetter(finalPMArray);
+		// console.log("final PM array", finalPMArray);
+		timepicker.hoursGetter(finalPMArray);
 }
 
 function objectify (amArray, PMarray) {
@@ -138,7 +150,7 @@ function objectify (amArray, PMarray) {
 
 timepicker.hoursGetter = function() {
 	return objectify(finalAMArray, finalPMArray);
-}
+};
 
 
 module.exports = timepicker;

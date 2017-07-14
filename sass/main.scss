@@ -1,13 +1,28 @@
 .infoBox{
     background-color: bisque;
-    height:80%;
+    height:90%;
     width:30%;
     margin-right:2%;
     overflow: auto;
 }
 
+.timepicker {
+    margin-top: 8px;
+    height: 34px;
+    border-radius: 4px;
+}
+
 .map{
    height: 90%;
+   min-width: 640px;
+   min-height: 640px;
+}
+
+.search-methods {
+    display: inline-block;
+    padding-top: 3em;
+    margin-left: 4em;
+    width: 400px;
 }
 
 .block{
@@ -22,7 +37,8 @@
 }
 
 .highlight {
-    border: 2px solid goldenrod;
+    border: 3px outset lightblue;
+    box-shadow: -2px -2px 20px black;
 }
 
 .isHidden {
@@ -42,6 +58,7 @@
 
 nav{
     height:150px;
+    box-shadow: 2px 0 10px gray;
 }
 
 h3 {
@@ -50,4 +67,13 @@ h3 {
 
 h4 {
     font-size: 1.2em;
+}
+
+.area-box {
+    min-width: 192px;
+    min-height: 192px;
+}
+
+footer {
+    text-align: center;
 }
