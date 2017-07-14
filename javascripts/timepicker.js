@@ -11,6 +11,7 @@ let $ = require ('jquery');
 let attractionsFactory = require ('./attractions.js');
 let attractionsWithTypes = require ('./data-processor.js');
 let types = require ('./types.js');
+let optionsTemplate = require('../templates/options.hbs');
 let newArray = [];
 let attractions = null;
 
@@ -20,27 +21,15 @@ timepicker.getTimePickerValue = function() {
 
 //get the attractions objects with their types, then call the next function at the end of the promise
 };
-attractionsFactory.getAttractions()
-	.then (function(AttractionsObj) {
-		attractions = AttractionsObj;
-		return types.getTypes();
-	})
-	.then (function(typesData) {
-		let newTypesObj = attractionsWithTypes.reformatTypeData(typesData);
-		attractions = attractionsWithTypes.giveAttractsTheirTypeName(newTypesObj, attractions);
-		showTimes();
-	});
-
 
 let allTimesArray = [];
 let uniqueTimesArray = [];
 let timesPM = [];
 let timesAM = [];
 let finalPMArray = [];
-let finalAMArray = []; 
+let finalAMArray = [];
 
-//get the arrays of show times from every attraction with a list of times
-function showTimes () {
+timepicker.showTimes = function (attractions) {
 	for (var key in attractions) {
 		let attrTime = attractions[key].times;
 		 if (attrTime !== undefined) {
@@ -70,7 +59,7 @@ function sortTimes (timesArray) {
 		} else {
 			timesAM.push(time);
 		}
-		
+
 	});
 	console.log("AM", timesAM);
 	takeOffAM(timesAM);
@@ -125,6 +114,7 @@ function rearrangePMs (arrayOfPMTimes) {
 		timepicker.hoursGetter(finalPMArray);
 }
 
+
 //package both arrays as an object
 function objectify (amArray, PMarray) {
   return {
@@ -135,7 +125,8 @@ function objectify (amArray, PMarray) {
 
 //make hours available to rest of app
 timepicker.hoursGetter = function() {
-	return objectify(finalAMArray, finalPMArray);
+		return objectify(finalAMArray, finalPMArray);
+
 };
 
 
