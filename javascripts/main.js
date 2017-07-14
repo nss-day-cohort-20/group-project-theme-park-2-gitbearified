@@ -34,11 +34,7 @@ ThemePark.areas.getAreas()
 	 ThemePark.dataProcessor.attachNameToMapSquares(areasData);
 });
 
-//add function to get times here, then write to dom function:
-// .then(function(data){
-// 	let optionsData = data;
-// ThemePark.DOMmanager.writeToDOM(optionsTemplate(    ), $('#timepicker'));
-// });
+
 
 // on area click get id of div element
 $(".area-box").on("click", function() {
