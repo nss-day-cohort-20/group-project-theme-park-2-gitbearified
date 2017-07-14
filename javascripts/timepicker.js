@@ -11,6 +11,7 @@ let $ = require ('jquery');
 let attractionsFactory = require ('./attractions.js');
 let attractionsWithTypes = require ('./data-processor.js');
 let types = require ('./types.js');
+let optionsTemplate = require('../templates/options.hbs');
 let newArray = [];
 let attractions = null;
 
@@ -18,17 +19,8 @@ timepicker.getTimePickerValue = function() {
 	return $('#timepicker').val();
 
 };
-attractionsFactory.getAttractions()
-	.then (function(AttractionsObj) {
-		attractions = AttractionsObj;
-		return types.getTypes();
-	})
-	.then (function(typesData) {
-		let newTypesObj = attractionsWithTypes.reformatTypeData(typesData);
-		attractions = attractionsWithTypes.giveAttractsTheirTypeName(newTypesObj, attractions);
-		showTimes();
-		console.log("getter", timepicker.hoursGetter());
-	});
+
+
 
 
 let allTimesArray = [];
@@ -38,7 +30,7 @@ let timesAM = [];
 let finalPMArray = [];
 let finalAMArray = [];
 
-function showTimes () {
+timepicker.showTimes = function (attractions) {
 	for (var key in attractions) {
 		let attrTime = attractions[key].times;
 		 if (attrTime !== undefined) {
@@ -129,12 +121,8 @@ function rearrangePMs (arrayOfPMTimes) {
 		timepicker.hoursGetter(finalPMArray);
 }
 
-//add function to get times here? using time arrays, then write to dom function:
 
-// .then(function(data){
-// 	let optionsData = data;
-// ThemePark.DOMmanager.writeToDOM(optionsTemplate(  array data here  ), $('#timepicker'));
-// });
+
 function objectify (amArray, PMarray) {
   return {
   	AM: amArray,
@@ -143,7 +131,8 @@ function objectify (amArray, PMarray) {
 }
 
 timepicker.hoursGetter = function() {
-	return objectify(finalAMArray, finalPMArray);
+
+		return objectify(finalAMArray, finalPMArray);
 };
 
 

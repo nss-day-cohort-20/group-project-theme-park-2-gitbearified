@@ -3,11 +3,9 @@
 let $ = require('jquery');
 let Handlebars = require('hbsfy/runtime');
 let attractionTemplate = require('../templates/attractions.hbs');
-let optionsTemplate = require('../templates/options.hbs');
+// let optionsTemplate = require('../templates/options.hbs');
 let $parkInfoDiv = $('.parkInfo');
 let search = require('./search.js');
-let timepicker = require('./timepicker.js');
-
 
 let ThemePark= {
 	areas: require ('./areas.js'),
@@ -34,6 +32,26 @@ ThemePark.areas.getAreas()
 	 ThemePark.dataProcessor.attachNameToMapSquares(areasData);
 });
 
+//add function to get times here? using time arrays, then write to dom function:
+// ThemePark.parkInfo.getParkInfo()
+// .then(function (parkInfoData){
+// 	ThemePark.dataProcessor.giveAttractsParkHours(parkInfoData, ThemePark.attractions.getAttractions());
+
+// })
+
+//promise.all
+Promise.all([ThemePark.attractions.getAttractions(),ThemePark.types.getTypes() ])
+.then (function([AttractionsObj, typesData]) {
+	let newTypesObj = ThemePark.dataProcessor.reformatTypeData(typesData);
+	let attractions = ThemePark.dataProcessor.giveAttractsTheirTypeName(newTypesObj, AttractionsObj);
+	ThemePark.timepicker.showTimes(attractions);
+	let optionsData = ThemePark.timepicker.hoursGetter();
+	console.log ("optionsData", optionsData);
+
+});
+
+// ThemePark.DOMmanager.writeToDOM(optionsTemplate(finalAMArray ), $('#AMtimepicker'));
+// ThemePark.DOMmanager.writeToDOM(optionsTemplate( finalPMArray  ), $('#PMtimepicker'));
 
 
 // on area click get id of div element
