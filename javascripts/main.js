@@ -7,6 +7,7 @@ let optionsTemplate = require('../templates/options.hbs');
 let optionsTemplatePM = require('../templates/optionsPM.hbs');
 let $parkInfoDiv = $('.parkInfo');
 let search = require('./search.js');
+let dataOfTypes;
 
 let ThemePark= {
 	areas: require ('./areas.js'),
@@ -37,8 +38,8 @@ ThemePark.areas.getAreas()
 Promise.all([ThemePark.attractions.getAttractions(),ThemePark.types.getTypes() ])
 .then (function([AttractionsObj, typesData]) {
 	let newTypesObj = ThemePark.dataProcessor.reformatTypeData(typesData);
-	let attractions = ThemePark.dataProcessor.giveAttractsTheirTypeName(newTypesObj, AttractionsObj);
-	ThemePark.timepicker.showTimes(attractions);
+		dataOfTypes = ThemePark.dataProcessor.giveAttractsTheirTypeName(newTypesObj, AttractionsObj);
+	ThemePark.timepicker.showTimes(dataOfTypes);
 	let optionsData = ThemePark.timepicker.hoursGetter();
 	console.log ("optionsData", optionsData);
 	ThemePark.DOMmanager.writeToDOM(optionsTemplate(optionsData.AM), $('#AMtimepicker'));
@@ -101,21 +102,16 @@ $(document).keypress (function(event) {
 $('.select-time').change( function() {
 	let time = $(this).val();
 	console.log("this", $(this).val());
+		// ThemePark.attractions.getAttractions()
+		// .then(function(attractions){
+		let attractionObjectArrayByTime = ThemePark.timepicker.attractionsTime(dataOfTypes, time);
 
-	if (time !== "--select a time--") {
-		ThemePark.attractions.getAttractions()
-		.then(function(attractions){
-			return ThemePark.timepicker.attractionsTime(attractions, time);
-		})
-		.then(function(attractionObjectArrayByTime) {
-			let typesData = ThemePark.types.getTypes();
-			let newTypesObj = ThemePark.dataProcessor.reformatTypeData(typesData);
-			let selectedAttractionsByTime = ThemePark.dataProcessor.giveAttractsTheirTypeName(newTypesObj, attractionObjectArrayByTime);
+		// .then(function(attractionObjectArrayByTime) {
+			console.log("types?????", dataOfTypes);
+			// let newTypesObj = ThemePark.dataProcessor.reformatTypeData(typesData);
+			// let selectedAttractionsByTime = ThemePark.dataProcessor.giveAttractsTheirTypeName(newTypesObj, attractionObjectArrayByTime);
 
-			ThemePark.DOMmanager.writeToDOM(attractionTemplate(selectedAttractionsByTime), $parkInfoDiv);
-
-		});
-	}
+			ThemePark.DOMmanager.writeToDOM(attractionTemplate(attractionObjectArrayByTime), $parkInfoDiv);
 });
 
 ThemePark.DOMmanager.writeToDOM(new Date().getFullYear(), $('#copyright'));
